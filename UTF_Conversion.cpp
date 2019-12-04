@@ -23,7 +23,7 @@ int main(int argc, char** argv)
 		return 0;
 	}
 	const char* test_file_path = argv[1];
-	std::ifstream in(test_file_path);
+	std::ifstream in(test_file_path, ios::in | ios::binary);
 	std::string inputStr;
 
 	if (in.is_open()) {
@@ -56,6 +56,21 @@ int main(int argc, char** argv)
 	std::wstring utf16;
 
 	utf16 = utf8_to_utf16(inputStr);
+	unsigned int len = 0;
+	len = (unsigned int)utf16.length();
+
+
+	string filePath = "test.txt";
+
+	// write File
+	ofstream writeFile(filePath.data(), ios::out | ios::binary);
+	if (writeFile.is_open()) {
+		//writeFile << "Hello World!\n";
+		//writeFile << "This is C++ File Contents.\n";
+		writeFile.write((char*)utf16.data(), utf16.length() * 2);
+		writeFile.close();
+	}
 
 	return 0;
 }
+
