@@ -47,11 +47,6 @@ int main(int argc, char** argv)
 		std::cout << "파일을 찾을 수 없습니다!" << std::endl;
 	}
 
-	unsigned char rawData[13] = {
-		0xEF, 0xBB, 0xBF, 0x74, 0x65, 0x73, 0x74, 0xEC, 0x95, 0x88, 0xEB, 0x85,
-		0x95
-	};
-
 	std::string strA(rawData, rawData + sizeof(rawData));
 	std::wstring utf16;
 
@@ -65,8 +60,6 @@ int main(int argc, char** argv)
 	// write File
 	ofstream writeFile(filePath.data(), ios::out | ios::binary);
 	if (writeFile.is_open()) {
-		//writeFile << "Hello World!\n";
-		//writeFile << "This is C++ File Contents.\n";
 		writeFile.write((char*)utf16.data(), utf16.length() * 2);
 		writeFile.close();
 	}
